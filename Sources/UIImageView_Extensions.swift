@@ -1,6 +1,23 @@
 import UIKit
+import SwiftyGif
+import SDWebImage
 
 extension UIImageView {
+    // Handle gif
+    func setImageDetectGif(
+        with url: URL?,
+        placeholderImage: UIImage?,
+        options: SDWebImageOptions,
+        progress: SDImageLoaderProgressBlock?,
+        completed: SDExternalCompletionBlock?
+    ) {
+        guard url?.absoluteString.lowercased().hasSuffix(".gif") == true
+        else {
+            sd_setImage(with: url, placeholderImage: placeholderImage, options: options, progress: progress, completed: completed)
+            return
+        }
+        setGifFromURL(url!)
+    }
     
     // Data holder tap recognizer
     private class TapWithDataRecognizer:UITapGestureRecognizer {

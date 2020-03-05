@@ -3,6 +3,7 @@ import UIKit
 enum ExampleType:CaseIterable, CustomStringConvertible {
     
     case basic
+    case basicGif
     case withURL
     case withUIImages
     case withURLs
@@ -11,6 +12,8 @@ enum ExampleType:CaseIterable, CustomStringConvertible {
         switch self {
             case .basic:
                 return "Basic"
+            case .basicGif:
+                return "Basic Gif"
             case .withURL:
                 return "With URL"
             case .withUIImages:
@@ -24,6 +27,8 @@ enum ExampleType:CaseIterable, CustomStringConvertible {
         switch self {
             case .basic:
                 return BasicViewController()
+            case .basicGif:
+                return BasicViewController(isGif: true)
             case .withURL:
                 return WithURLViewController()
             case .withUIImages:

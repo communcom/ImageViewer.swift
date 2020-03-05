@@ -25,7 +25,13 @@ struct Data {
         "cat5",
     ]
     
+    static let gifImageNames: [String] = [
+        "catGif1"
+    ]
+    
     static let images:[UIImage] = Self.imageNames.compactMap { UIImage(named: $0)! }
+    
+    static let gifImages:[UIImage] = Self.gifImageNames.compactMap { try? UIImage(gifName: $0)}
     
     static let imageUrls:[URL] = Self.imageNames.compactMap {
         URL(string: "https://raw.githubusercontent.com/michaelhenry/MHFacebookImageViewer/master/Example/Demo/Assets.xcassets/\($0).imageset/\($0).jpg")! }
