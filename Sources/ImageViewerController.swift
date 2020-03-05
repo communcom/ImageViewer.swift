@@ -86,30 +86,30 @@ class ImageViewerController:UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let sourceView = sourceView,
-            let gifImage = sourceView.gifImage
-        {
-            imageView.setGifImage(gifImage)
-        } else {
-            switch imageItem {
-            case .image(let img):
+        switch imageItem {
+        case .image(let img):
+            if let sourceView = sourceView,
+                let gifImage = sourceView.gifImage
+            {
+                imageView.setGifImage(gifImage)
+            } else {
                 imageView.image = img
                 imageView.layoutIfNeeded()
-            case .url(let url, let placeholder):
-                imageView.setImageDetectGif(
-                    with: url,
-                    placeholderImage: placeholder ?? sourceView?.image,
-                    options: [],
-                    progress: nil) {[weak self] (img, err, type, url) in
-                        DispatchQueue.main.async {
-                            UIView.performWithoutAnimation {
-                                self?.imageView.layoutIfNeeded()
-                            }
+            }
+        case .url(let url, let placeholder):
+            imageView.setImageDetectGif(
+                with: url,
+                placeholderImage: placeholder ?? sourceView?.image,
+                options: [],
+                progress: nil) {[weak self] (img, err, type, url) in
+                    DispatchQueue.main.async {
+                        UIView.performWithoutAnimation {
+                            self?.imageView.layoutIfNeeded()
                         }
                     }
-            default:
-                break
-            }
+                }
+        default:
+            break
         }
         
         addGestureRecognizers()

@@ -3,15 +3,29 @@ import ImageViewer_swift
 import SDWebImage
 
 class WithURLViewController:UIViewController {
+    var isGif: Bool
+    
+    init(isGif: Bool = false) {
+        self.isGif = isGif
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     lazy var imageView:UIImageView = {
         let iv = UIImageView()
         
         // Set an image with low resolution.
-        iv.image = Data.images[0].resize(targetSize: .thumbnail)
+        if isGif {
+            iv.setGifFromURL(Data.gifImageUrls[0])
+        } else {
+            iv.image = Data.images[0].resize(targetSize: .thumbnail)
+        }
         
         // Setup Image Viewer With URL
-        iv.setupImageViewer(url: Data.imageUrls[0])
+        iv.setupImageViewer(url: isGif ? Data.gifImageUrls[0] : Data.imageUrls[0])
         return iv
     }()
     

@@ -5,6 +5,7 @@ enum ExampleType:CaseIterable, CustomStringConvertible {
     case basic
     case basicGif
     case withURL
+    case withGifURL
     case withUIImages
     case withURLs
     
@@ -14,6 +15,8 @@ enum ExampleType:CaseIterable, CustomStringConvertible {
                 return "Basic"
             case .basicGif:
                 return "Basic Gif"
+            case .withGifURL:
+                return "With Gif URL"
             case .withURL:
                 return "With URL"
             case .withUIImages:
@@ -31,6 +34,8 @@ enum ExampleType:CaseIterable, CustomStringConvertible {
                 return BasicViewController(isGif: true)
             case .withURL:
                 return WithURLViewController()
+            case .withGifURL:
+                return WithURLViewController(isGif: true)
             case .withUIImages:
                 return WithImagesViewController()
             case .withURLs:
